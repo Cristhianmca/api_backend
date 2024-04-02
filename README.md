@@ -5,3 +5,4 @@ ecommerce api con django y django rest framework
 python -m venv venv
 source venv/Scripts/activate
 pip install -r requirements.txt
+
