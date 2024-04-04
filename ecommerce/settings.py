@@ -96,16 +96,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# CORS settings
+
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:5173',  # Replace with your frontend's URL
-]
+ ]
 CORS_ALLOW_METHODS = [
     'POST',
     
-]
+ ]
 
 
 # Password validation
