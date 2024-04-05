@@ -6,12 +6,22 @@ from .models import (
     Category,Product,
     Client,
     Order,OrderDetail,
-    PaymentMethod,OrderPayment
+    PaymentMethod,OrderPayment,
+    Marca
 )
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
+        fields = '__all__'
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        return representation
+    
+class MarcaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Marca
         fields = '__all__'
         
     def to_representation(self,instance):

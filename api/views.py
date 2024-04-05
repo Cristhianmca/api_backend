@@ -17,7 +17,8 @@ from .models import (
     Category,Product,
     Client,Order,
     PaymentMethod,
-    OrderPayment
+    OrderPayment,
+    Marca
 )
 
 from .serializers import (
@@ -30,7 +31,8 @@ from .serializers import (
     ClientFullSerializer,
     OrderSerializer,
     PaymentMethodSerializer,
-    OrderPaymentSerializer
+    OrderPaymentSerializer,
+    MarcaSerializer
 )
 
 from django.contrib.auth.models import User
@@ -38,6 +40,11 @@ from django.contrib.auth.models import User
 class CategoryView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    
+class MarcaView(generics.ListAPIView):
+    queryset = Marca.objects.all()
+    serializer_class = MarcaSerializer
+    
 
 class ProductView(generics.ListAPIView):
     queryset = Product.objects.all()
