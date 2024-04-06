@@ -7,7 +7,9 @@ from . import views
 urlpatterns = [
     path('categories', views.CategoryView.as_view()),
     path('products',views.ProductView.as_view()),
+    path('product/<int:pk>',views.ProductDetailView.as_view()),
     path('marca',views.MarcaView.as_view()),
+    path('marca/<int:pk>',views.MarcaDetailView.as_view()),
     path('category/<int:category_id>/products',views.CategoryProductsView.as_view()),
     path('client',views.ClientView.as_view()),
     path('user',views.UserView.as_view()),
