@@ -1,5 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from ckeditor.fields import RichTextField
 
 from django.contrib.auth.models import User
 
@@ -25,19 +26,21 @@ class Marca(models.Model):
     
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    # aqui marca significa la marca del producto y que se relaciona con la tabla Marca , explicame que significa este codigo 
+    # aqui marca significa la marca del producto y que se relaciona con la tabla Marca 
     marca = models.ForeignKey(Marca,
                           related_name='products',
                           on_delete=models.RESTRICT,
                           default=1)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10,decimal_places=2)
+    description = RichTextField()
+    price = models.DecimalField(max_digits=10, decimal_places=0, )
+    
+    
     image = CloudinaryField('image',default='')
     
     category = models.ForeignKey(Category,
                                  related_name='products',
                                  on_delete=models.RESTRICT)
-    
+   
     class Meta:
         db_table = 'tbl_product'
     

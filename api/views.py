@@ -113,17 +113,24 @@ class OrderPaymentView(generics.ListCreateAPIView):
 class CreatePaymentView(APIView):
     def post(self, request):
         # Obtener los productos desde la base de datos
-        products = Product.objects.all()
+        products = Product.objects.all() # Obtener todos los productos
+        
+     
+    
 
         # Crear una lista de ítems para la preferencia de pago
         items = []
+        
         for product in products:
+            
             item = {
+                
                 "id": product.id,  # ID del producto, puede ser cualquier valor único
                 "title": product.name,  # Nombre del producto
                 "quantity": 1,  # Cantidad del producto (puedes ajustarlo según tu lógica)
                 "currency_id": "PEN",  # Moneda (Soles)
                 "unit_price": float(product.price)  # Precio del producto
+                
                 
             }
             items.append(item)
@@ -138,7 +145,7 @@ class CreatePaymentView(APIView):
             "https://api.mercadopago.com/checkout/preferences",
             json=preference_data,
             headers={
-                "Authorization": "Bearer TEST-6507172590645805-040412-b0430881cae2a21efdbdf96d9e174326-1724625949"
+                "Authorization": "Bearer TEST-1403528576089699-040215-935134bd444d98cf740d4fb543844023-1724625949"
             }
         )
 

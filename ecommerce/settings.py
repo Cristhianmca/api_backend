@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'ckeditor',
 ]
 
 REST_FRAMEWORK = {
@@ -157,3 +158,25 @@ cloudinary.config(
 )
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        
+    },
+}
+
+CSP_SCRIPT_SRC = [
+    "'self'",  # Permite la carga de scripts desde la misma URL
+    "https://http2.mlstatic.com",  # Agrega la URL permitida para cargar scripts
+    "https://www.mercadopago.com",  # Agrega la URL permitida para cargar scripts
+    "https://www.google.com",  # Agrega la URL permitida para cargar scripts
+    "https://www.gstatic.com",  # Agrega la URL permitida para cargar scripts
+    "https://cdn.jsdelivr.net",  # Agrega la URL permitida para cargar scripts
+    "https://ajax.googleapis.com",  # Agrega la URL permitida para cargar scripts
+    "https://cdnjs.cloudflare.com",  # Agrega la URL permitida para cargar scripts
+    "https://stackpath.bootstrapcdn.com",  # Agrega la URL permitida para cargar scripts
+    "https://code.jquery.com",  # Agrega la URL permitida para cargar scripts
+    "https://cdn.jsdelivr.net",  # Agrega la URL permitida para cargar scripts
+    "https://stackpath.bootstrapcdn.com",  # Agrega la URL permitida para cargar scripts
+]
