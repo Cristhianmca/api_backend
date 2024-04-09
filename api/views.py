@@ -9,6 +9,12 @@ import requests
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Product
+from rest_framework.generics import RetrieveAPIView
+
+
+
+from .models import Cupon  
+
 
 
 
@@ -18,7 +24,8 @@ from .models import (
     Client,Order,
     PaymentMethod,
     OrderPayment,
-    Marca
+    Marca,
+    Cupon
 )
 
 from .serializers import (
@@ -32,10 +39,19 @@ from .serializers import (
     OrderSerializer,
     PaymentMethodSerializer,
     OrderPaymentSerializer,
-    MarcaSerializer
+    MarcaSerializer,
+    CuponSerializer
+    
 )
 
 from django.contrib.auth.models import User
+
+
+class CuponView(RetrieveAPIView):
+    queryset = Cupon.objects.all()
+    serializer_class = CuponSerializer
+    lookup_field = 'codigo'
+    
 
 class CategoryView(generics.ListAPIView):
     queryset = Category.objects.all()
@@ -152,8 +168,8 @@ class CreatePaymentView(APIView):
         if response.status_code == 201:
             preference_id = response.json().get("id")
             # Obtener el sandbox_init_point de la respuesta y devolverlo como parte de la respuesta
-            sandbox_init_point = response.json().get("sandbox_init_point")
-            return Response({"preference_id": preference_id, "sandbox_init_point": sandbox_init_point})
+            init_point = response.json().get("init_point")
+            return Response({"preference_id": preference_id, "init_point": init_point})
         else:
             # Manejo de errores
             return Response({"error": "No se pudo crear la preferencia de pago"}, status=response.status_code)

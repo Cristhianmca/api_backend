@@ -5,6 +5,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('cupon/<str:codigo>', views.CuponView.as_view()),
     path('categories', views.CategoryView.as_view()),
     path('products',views.ProductView.as_view()),
     path('product/<int:pk>',views.ProductDetailView.as_view()),

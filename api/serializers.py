@@ -7,9 +7,18 @@ from .models import (
     Client,
     Order,OrderDetail,
     PaymentMethod,OrderPayment,
-    Marca
+    Marca,
+    Cupon,
 )
 
+class CuponSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cupon
+        fields = ['codigo', 'porcentaje_descuento', 'fecha_vencimiento', 'cantidad_usos', 'cantidad_usos_limite']
+
+    
+        
+    
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category

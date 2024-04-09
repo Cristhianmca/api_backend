@@ -23,7 +23,19 @@ class Marca(models.Model):
     
     def __str__(self):
         return self.name
-    
+
+class Cupon(models.Model):
+    codigo = models.CharField(max_length=10, unique=True)
+    porcentaje_descuento = models.DecimalField(max_digits=5, decimal_places=2)
+    fecha_vencimiento = models.DateField()
+    cantidad_usos = models.IntegerField(default=0)
+    cantidad_usos_limite = models.IntegerField(default=0)
+    # Otros campos según tus necesidades
+
+    def __str__(self):
+        return self.codigo
+
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
     # aqui marca significa la marca del producto y que se relaciona con la tabla Marca 
@@ -33,7 +45,10 @@ class Product(models.Model):
                           default=1)
     description = RichTextField()
     price = models.DecimalField(max_digits=10, decimal_places=0, )
-    
+    price_discount = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    cupon = models.ForeignKey(Cupon, related_name='productos', on_delete=models.SET_NULL, null=True, blank=True)
+    stock = models.IntegerField(default=0)
+    available = models.BooleanField(default=True)
     
     image = CloudinaryField('image',default='')
     
