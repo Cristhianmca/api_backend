@@ -35,6 +35,7 @@ class MarcaSerializer(serializers.ModelSerializer):
         
     def to_representation(self,instance):
         representation = super().to_representation(instance)
+        representation['image'] = instance.image.url
         return representation
         
 class ProductSerializer(serializers.ModelSerializer):

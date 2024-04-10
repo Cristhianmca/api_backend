@@ -17,6 +17,7 @@ class Category(models.Model):
     
 class Marca(models.Model):
     name = models.CharField(max_length=200)
+    image = CloudinaryField('image',default='')
     
     class Meta:
         db_table = 'tbl_marca'
@@ -44,6 +45,8 @@ class Product(models.Model):
                           on_delete=models.RESTRICT,
                           default=1)
     description = RichTextField()
+    specifications = RichTextField()
+    
     price = models.DecimalField(max_digits=10, decimal_places=0, )
     price_discount = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     cupon = models.ForeignKey(Cupon, related_name='productos', on_delete=models.SET_NULL, null=True, blank=True)
