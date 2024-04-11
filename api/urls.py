@@ -5,12 +5,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('cupon/<str:codigo>', views.CuponView.as_view()),
+    path('cupon/<str:codigo>', views.CuponView.as_view()),#ruta para el serializador CuponSerializer que recibe el codigo del cupon como parametro y retorna el cupon con ese codigo 
     path('categories', views.CategoryView.as_view()),
     path('products',views.ProductView.as_view()),
-    path('product/<int:pk>',views.ProductDetailView.as_view()),
-    path('marca',views.MarcaView.as_view()),
-    path('marca/<int:pk>',views.MarcaDetailView.as_view()),
+    path('product/<int:pk>',views.ProductDetailView.as_view()),#ruta para el serializador ProductSerializer que recibe el id del producto como parametro y retorna el producto con ese id # pk es el id del producto 
+    path('marca',views.MarcaView.as_view()),#ruta para el serializador MarcaSerializer que retorna todas las marcas
+    path('marca/<int:pk>',views.MarcaDetailView.as_view()),#ruta para el serializador MarcaSerializer que recibe el id de la marca como parametro y retorna la marca con ese id #pk es el id de la marca
     path('category/<int:category_id>/products',views.CategoryProductsView.as_view()),
     path('client',views.ClientView.as_view()),
     path('user',views.UserView.as_view()),

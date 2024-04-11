@@ -47,36 +47,36 @@ from .serializers import (
 from django.contrib.auth.models import User
 
 
-class CuponView(RetrieveAPIView):
-    queryset = Cupon.objects.all()
-    serializer_class = CuponSerializer
-    lookup_field = 'codigo'
+class CuponView(RetrieveAPIView):# se crea una clase para la vista de los cupones # se importa RetrieveAPIView que significa que se puede ver un solo objeto esto se hace para que se pueda ver un solo cupon y no todos los cupones en la base de datos 
+    queryset = Cupon.objects.all()# se hace una consulta a la base de datos para que se pueda ver todos los cupones # se importa el modelo Cupon para que se pueda hacer la consulta a la base de datos # queryset es una variable que se usa para hacer la consulta a la base de datos # obejcts.all() se usa para que se pueda ver todos los cupones en la base de datos
+    serializer_class = CuponSerializer #serializer_class es una variable que se usa para que se pueda serializar los datos de la base de datos # se importa CuponSerializer para que se pueda serializar los datos de la base de datos # serealizar es convertir los datos de la base de datos en un formato que se pueda ver en la pagina web
+    lookup_field = 'codigo'# se crea una variable que se llama lookup_field que se usa para que se pueda buscar un cupon por el codigo # se pone codigo porque es el campo que se va a usar para buscar un cupon en la base de datos
     
 
 class CategoryView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     
-class MarcaView(generics.ListAPIView):
+class MarcaView(generics.ListAPIView): # se crea una clase para la vista de las marcas # se importa ListAPIView que significa que se puede ver una lista de objetos esto se hace para que se pueda ver una lista de marcas y no una sola marca en la base de datos
+    queryset = Marca.objects.all()# se hace una consulta a la base de datos para que se pueda ver todas las marcas # se importa el modelo Marca para que se pueda hacer la consulta a la base de datos # queryset es una variable que se usa para hacer la consulta a la base de datos # obejcts.all() se usa para que se pueda ver todas las marcas en la base de datos
+    serializer_class = MarcaSerializer#serializer_class es una variable que se usa para que se pueda serializar los datos de la base de datos # se importa MarcaSerializer para que se pueda serializar los datos de la base de datos # serealizar es convertir los datos de la base de datos en un formato que se pueda ver en la pagina web
+    
+class MarcaDetailView(generics.RetrieveAPIView):# se crea una clase para la vista de una marca # se importa RetrieveAPIView que significa que se puede ver un solo objeto esto se hace para que se pueda ver una sola marca y no todas las marcas en la base de datos #generic.RetrieveAPIView se usa para que se pueda ver un solo objeto en la base de datos
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
     
-class MarcaDetailView(generics.RetrieveAPIView):
-    queryset = Marca.objects.all()
-    serializer_class = MarcaSerializer
-    
 
-class ProductView(generics.ListAPIView):
+class ProductView(generics.ListAPIView):# se crea una clase para la vista de los productos # se importa ListAPIView que significa que se puede ver una lista de objetos esto se hace para que se pueda ver una lista de productos y no un solo producto en la base de datos
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class ProductDetailView(generics.RetrieveAPIView):
+class ProductDetailView(generics.RetrieveAPIView):# se crea una clase para la vista de un producto # se importa RetrieveAPIView que significa que se puede ver un solo objeto esto se hace para que se pueda ver un solo producto y no todos los productos en la base de datos #generic.RetrieveAPIView se usa para que se pueda ver un solo objeto en la base de datos , se puede buscar un producto por el id
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class CategoryProductsView(generics.RetrieveAPIView):
-    queryset = Category.objects.all()
-    lookup_url_kwarg = 'category_id'
+class CategoryProductsView(generics.RetrieveAPIView):# se crea una clase para la vista de los productos de una categoria # se importa RetrieveAPIView que significa que se puede ver un solo objeto esto se hace para que se pueda ver un solo producto y no todos los productos en la base de datos #generic.RetrieveAPIView se usa para que se pueda ver un solo objeto en la base de datos
+    queryset = Category.objects.all()# se hace una consulta a la base de datos para que se pueda ver todas las categorias # se importa el modelo Category para que se pueda hacer la consulta a la base de datos # queryset es una variable que se usa para hacer la consulta a la base de datos # obejcts.all() se usa para que se pueda ver todas las categorias en la base de datos
+    lookup_url_kwarg = 'category_id'# se crea una variable que se llama lookup_url_kwarg que se usa para que se pueda buscar una categoria por el id # se pone category_id porque es el campo que se va a usar para buscar una categoria en la base de datos
     serializer_class = CategoryProductSerializer
 
 class ClientView(generics.ListCreateAPIView):
@@ -126,43 +126,49 @@ class OrderPaymentView(generics.ListCreateAPIView):
     queryset = OrderPayment.objects.all()
     serializer_class = OrderPaymentSerializer
     
-class CreatePaymentView(APIView):
+class CreatePaymentView(APIView):# se crea una clase para la vista de los pagos # se importa APIView que significa que se puede hacer una solicitud a la base de datos esto se hace para que se pueda hacer una solicitud a la base de datos para que se pueda hacer un pago en la pagina web #generic.RetrieveAPIView se usa para que se pueda hacer una solicitud a la base de datos
     def post(self, request):
         # Obtener los productos desde la base de datos
         products = Product.objects.all() # Obtener todos los productos
+        
+        
         
      
     
 
         # Crear una lista de ítems para la preferencia de pago
-        items = []
+        items = []# se crea una lista que se llama items que se usa para que se pueda guardar los productos que se van a comprar en la pagina web # se pone items porque es el nombre de la lista que se va a usar para guardar los productos que se van a comprar en la pagina web # si le asigno un nombre diferente no se va a guardar los productos que se van a comprar en la pagina web
         
-        for product in products:
+        for product in products: 
+            # Recorrer todos los productos de la base de datos # se crea un bucle que se llama product que se usa para que se pueda recorrer todos los productos de la base de datos # se pone product porque es el nombre del bucle que se va a usar para recorrer todos los productos de la base de datos # si le asigno un nombre diferente no se va a recorrer todos los productos de la base de datos
             
-            item = {
-                
-                "id": product.id,  # ID del producto, puede ser cualquier valor único
-                "title": product.name,  # Nombre del producto
-                "quantity": 1,  # Cantidad del producto (puedes ajustarlo según tu lógica)
+            
+            item = {# se crea una variable que se llama item que se usa para que se pueda guardar los productos que se van a comprar en la pagina web # se pone item porque es el nombre de la variable que se va a usar para guardar los productos que se van a comprar en la pagina web # si le asigno un nombre diferente no se va a guardar los productos que se van a comprar en la pagina web
+               
+                "id": product.id,  # aqui va el id del producto de la base de datos # se pone id porque es el campo que se va a usar para guardar el id del producto de la base de datos # si le asigno un nombre diferente no se va a guardar el id del producto de la base de datos
+                "title": product ,  # Nombre del producto
+                "quantity": 1 ,  # Cantidad del producto si pongo 1 es porque solo se va a comprar un producto # si quiero que se pueda comprar mas de un producto solo tengo que cambiar el numero a la cantidad de productos que se quiera comprar pero si quiero por defecto que se almace los productos que se van a comprar en la pagina web solo tengo que poner 1
                 "currency_id": "PEN",  # Moneda (Soles)
-                "unit_price": float(product.price)  # Precio del producto
+                "unit_price": float(product.price)  # Precio del producto # float se usa para que se pueda guardar el precio del producto en la pagina web # si no se pone float no se va a guardar el precio del producto en la pagina web
                 
                 
             }
-            items.append(item)
+            items.append(item)# se usa append para que se pueda guardar los productos que se van a comprar en la pagina web # si no se pone append no se va a guardar los productos que se van a comprar en la pagina web
 
         # Construir la preferencia de pago con los ítems
-        preference_data = {
+        preference_data = {# se crea una variable que se llama preference_data que se usa para que se pueda guardar los productos que se van a comprar en la pagina web # se pone preference_data porque es el nombre de la variable que se va a usar para guardar los productos que se van a comprar en la pagina web # si le asigno un nombre diferente no se va a guardar los productos que se van a comprar en la pagina web
             "items": items
         }
 
         # Hacer una solicitud a la API de Mercado Pago para crear la preferencia
-        response = requests.post(
-            "https://api.mercadopago.com/checkout/preferences",
-            json=preference_data,
+        response = requests.post(# se hace una solicitud a la base de datos para que se pueda crear la preferencia de pago en la pagina web # se importa requests para que se pueda hacer una solicitud a la base de datos # se pone post porque se va a hacer una solicitud a la base de datos
+            "https://api.mercadopago.com/checkout/preferences",# se pone la url de la base de datos para que se pueda hacer una solicitud a la base de datos # se pone la url de la base de datos para que se pueda crear la preferencia de pago en la pagina web # se pone la url de la base de datos para que se pueda hacer un pago en la pagina web
+            json=preference_data,# se pone preference_data porque es la variable que se va a usar para guardar los productos que se van a comprar en la pagina web # si le asigno un nombre diferente no se va a guardar los productos que se van a comprar en la pagina web
             headers={
                 "Authorization": "Bearer TEST-1403528576089699-040215-935134bd444d98cf740d4fb543844023-1724625949"
             }
+            
+            
         )
 
         if response.status_code == 201:

@@ -11,10 +11,10 @@ from .models import (
     Cupon,
 )
 
-class CuponSerializer(serializers.ModelSerializer):
-    class Meta:
+class CuponSerializer(serializers.ModelSerializer):#serializador para el modelo Cupon
+    class Meta:#clase Meta para definir el modelo y los campos a serializar
         model = Cupon
-        fields = ['codigo', 'porcentaje_descuento', 'fecha_vencimiento', 'cantidad_usos', 'cantidad_usos_limite']
+        fields = ['codigo', 'porcentaje_descuento', 'fecha_vencimiento', 'cantidad_usos', 'cantidad_usos_limite']#campos a serializar del modelo Cupon que significan el codigo, porcentaje de descuento, fecha de vencimiento, cantidad de usos, cantidad de usos limite
 
     
         
@@ -28,24 +28,24 @@ class CategorySerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         return representation
     
-class MarcaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Marca
-        fields = '__all__'
+class MarcaSerializer(serializers.ModelSerializer):#serializador para el modelo Marca
+    class Meta:#clase Meta para definir el modelo y los campos a serializar
+        model = Marca #modelo Marca
+        fields = '__all__' # todos los campos del modelo Marca
         
-    def to_representation(self,instance):
-        representation = super().to_representation(instance)
-        representation['image'] = instance.image.url
+    def to_representation(self,instance): #metodo para representar los datos del modelo Marca en el serializador MarcaSerializer 
+        representation = super().to_representation(instance) #se obtiene la representacion de la instancia del modelo Marca esto quiere decir que se obtienen todos los campos del modelo Marca
+        representation['image'] = instance.image.url #se agrega el campo image a la representacion de la instancia del modelo Marca y se le asigna la url de la imagen de la instancia
         return representation
         
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):#serializador para el modelo Product
     class Meta:
         model = Product
         fields = '__all__'
         
-    def to_representation(self,instance):
-        representation = super().to_representation(instance)
-        representation['image'] = instance.image.url
+    def to_representation(self,instance):#metodo para representar los datos del modelo Product en el serializador ProductSerializer
+        representation = super().to_representation(instance)#se obtiene la representacion de la instancia del modelo Product esto quiere decir que se obtienen todos los campos del modelo Product
+        representation['image'] = instance.image.url #se agrega el campo image a la representacion de la instancia del modelo Product y se le asigna la url de la imagen de la instancia se le debe pasar el campo image de la instancia y se le debe asignar la url de la imagen de la instancia a diferencia de en models.py que se le asigna la imagen a la instancia esto quiere decir que se le asigna la url de la imagen a la representacion de la instancia , esta imagen se puede visualizar en el navegador en la url que se le asigno a la imagen
         return representation
     
 class CategoryProductSerializer(serializers.ModelSerializer):
@@ -142,7 +142,7 @@ class OrderPaymentSerializer(serializers.ModelSerializer):
         
     def to_representation(self,instance):
         representation = super().to_representation(instance)
-        representation['payment_method_name'] = instance.payment_method.name
+        representation['payment_method_name'] = instance.payment_method.name #se agrega el campo payment_method_name a la representacion de la instancia del modelo OrderPayment y se le asigna el nombre del metodo de pago de la instancia
         return representation
         
         
